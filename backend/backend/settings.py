@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     "corsheaders",
     "api",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,9 @@ MEDIA_URL = '/media/'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#          'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     )
+# }
