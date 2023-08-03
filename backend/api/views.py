@@ -126,8 +126,13 @@ class EdituserView(APIView):
         return Response(serialized.data)
           
 
+
+
+
 class AdminLogin(APIView):
+
     def post(self,request):
+
         email=request.data.get("email")
         password=request.data.get("password")
 
@@ -138,7 +143,13 @@ class AdminLogin(APIView):
                 print(userobj,"HHHHHHHHHHHH")
                 refresh = RefreshToken.for_user(userobj)
                 serialized=UserAccountSerializer(userobj)
-                return Response({'message': 'Login successful', 'access': str(refresh.access_token), 'refresh': str(refresh),"alldatas":serialized.data})
+
+                # ALL USERS DATAS
+                userobjs=UserAccount.objects.all()
+                serializedusers=UserAccountSerializer(userobjs,many=True)
+
+                
+                return Response({'message': 'Login successful', 'access': str(refresh.access_token), 'refresh': str(refresh),"alldatas":serialized.data,"userdatas":serializedusers.data})
         
                 
             
@@ -153,3 +164,22 @@ class AdminLogin(APIView):
         
 
     
+class AdminDisplay(APIView):
+    def get(self,request):
+        # email=request.data.get("email")
+        # adminobj=UserAccount.objects.get(email=email)
+        # serializedadmin=UserAccountSerializer(adminobj)
+        
+
+        userobjs=UserAccount.objects.all()
+        serializedusers=UserAccountSerializer(userobjs,many=True)
+
+
+
+
+
+
+
+        return Response({"userdatas":serializedusers.data})
+
+

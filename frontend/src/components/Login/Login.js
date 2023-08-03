@@ -7,7 +7,7 @@ import axiosInstance from "../../axios/axios";
 import jwt_decode from "jwt-decode";
 import Authcontext from "../../context/Logincontext";
 import { useNavigate } from "react-router-dom";
-
+import "./Login.css"
 const Login = () => {
   const { userDecode, setUserDecode, accessToken, setAccessToken } =
     useContext(Authcontext);
@@ -57,8 +57,9 @@ const Login = () => {
   return (
     <div>
       <Header />
+      <div className="card logincard">
       <div className="container mt-5">
-        <h2>LoginForm</h2>
+        <h2 className="mb-4">Login Form</h2>
 
         <div className="form-group">
           <label htmlFor="username">Email:</label>
@@ -86,9 +87,10 @@ const Login = () => {
           />
         </div>
 
-        <button onClick={handleLoginSubmit} className="btn btn-primary">
+        <button onClick={handleLoginSubmit} className="btn btn-primary mt-4 mb-3">
           Login
         </button>
+      </div>
       </div>
 
       <Footer />

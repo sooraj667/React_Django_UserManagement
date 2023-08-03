@@ -14,7 +14,9 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login_view'),
     path('signup/', SignupView.as_view(), name='signup_view'),
     path("edituser/<int:id>",EdituserView.as_view(),name="edituser_view"),
-    path("adminlogin/",AdminLogin.as_view(),name="adminlogin_view")
+    path("adminlogin/",AdminLogin.as_view(),name="adminlogin_view"),
+    path("admindisplay/",AdminDisplay.as_view(),name="admindisplay_view")
+
     
    
 ]

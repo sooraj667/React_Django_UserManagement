@@ -4,11 +4,13 @@ import Signup from './components/Signup/Signup';
 import Createpage from './pages/Createpage';
 import { Route,Routes } from 'react-router-dom';
 import Loginpage from './pages/Loginpage';
+import Adminloginpage from './pages/Adminloginpage';
 import { useState } from 'react';
 import Authcontext from './context/Logincontext';
 import Dashboardpage from './pages/Dashboardpage';
 import jwt_decode from "jwt-decode";
 import axios from "axios"
+import Adminhomepage from './pages/Adminhomepage';
 function App() {
   
   const [accessToken, setAccessToken] = useState(localStorage.getItem("authToken") ? localStorage.getItem("authToken") : "");
@@ -29,6 +31,8 @@ function App() {
         <Route path="/signuppage" element={<Createpage />} />
         <Route path="/loginpage" element={<Loginpage />} />
         <Route path="/dashboard" element={<Dashboardpage />} />
+        <Route path="/adminlogin" element={<Adminloginpage />} />
+        <Route path="/adminhome" element={<Adminhomepage />} />
        
     
 

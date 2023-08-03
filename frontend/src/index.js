@@ -9,10 +9,15 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import customersSlice from "./feautures/customers";
 import customerlogin from "./feautures/customerlogin";
+import adminloginSlice from "./feautures/adminlogin";
+
+
+
 const appstore = configureStore({
   reducer: {
     customers: customersSlice,
     customerlogin:customerlogin,
+    adminlogin:adminloginSlice
   },
 });
 
