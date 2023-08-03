@@ -70,6 +70,7 @@ class LoginView(APIView):
           
             userobj=UserAccount.objects.get(email=email,password=password)
             if userobj:
+               
                 refresh = RefreshToken.for_user(userobj)
                 serialized=UserAccountSerializer(userobj)
                 return Response({'message': 'Login successful', 'access': str(refresh.access_token), 'refresh': str(refresh),"alldatas":serialized.data})
@@ -120,6 +121,35 @@ class EdituserView(APIView):
         except:
             return Response({"msg":"some error"})
         userobj.name=name
+        userobj.save()
         serialized=UserAccountSerializer(userobj)
         return Response(serialized.data)
           
+
+class AdminLogin(APIView):
+    def post(self,request):
+        email=request.data.get("email")
+        password=request.data.get("password")
+
+        try:
+            userobj=UserAccount.objects.get(email=email,is_superuser=True)
+            if userobj.check_password(password):
+
+                print(userobj,"HHHHHHHHHHHH")
+                refresh = RefreshToken.for_user(userobj)
+                serialized=UserAccountSerializer(userobj)
+                return Response({'message': 'Login successful', 'access': str(refresh.access_token), 'refresh': str(refresh),"alldatas":serialized.data})
+        
+                
+            
+            
+        
+           
+
+        except:
+            return Response({"msg":"User Not found"})
+        
+
+        
+
+    

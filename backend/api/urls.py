@@ -13,7 +13,8 @@ urlpatterns = [
     path('refreshtoken/', TokenRefreshView.as_view(), name='token_refresh'),
     path('login/', LoginView.as_view(), name='login_view'),
     path('signup/', SignupView.as_view(), name='signup_view'),
-    path("edituser/<int:id>",EdituserView.as_view(),name="edituser_view")
+    path("edituser/<int:id>",EdituserView.as_view(),name="edituser_view"),
+    path("adminlogin/",AdminLogin.as_view(),name="adminlogin_view")
     
    
 ]

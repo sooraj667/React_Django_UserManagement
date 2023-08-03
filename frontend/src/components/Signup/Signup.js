@@ -129,6 +129,19 @@ const Signup = () => {
             />
           </div> */}
 
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="file"
+              className="form-control"
+              id="password"
+              name="password"
+              required
+              value={cust.value.password}
+              onChange={(e)=> dispatch(changePassword(e.target.value))}
+            />
+          </div>
+
           <button onClick={handleSubmit}  className="btn btn-primary">
             Sign Up
           </button>

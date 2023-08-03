@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [userdetails,setUserDetails]=useState("")
   const[toEdit,setToEdit]=useState(false)
   const[nameChange,setNameChange]=useState("")
-
+  const [image,setImage]=useState("")
   const handleEdit=()=>{
     axiosInstance.post(`edituser/${userdetails.id}`,{"name":nameChange}).then((res)=>{
       console.log(res.data)
@@ -25,6 +25,8 @@ const Dashboard = () => {
     if (storedDetails) {
       const parsedData = JSON.parse(storedDetails);
       setUserDetails(parsedData);
+      setImage(`http://127.0.0.1:8000${parsedData.image}`)
+      console.log(parsedData);
     }
   }, []);
 
@@ -71,8 +73,8 @@ const Dashboard = () => {
       <button onClick={logout}>Log Out</button>
       <h1>Welcome</h1>{ userDecode.username}
       <div>
-        {JSON.parse(localStorage.getItem("details")).name}
-        <img src={"http://127.0.0.1:8000/media/profiles/urb.jpg"+JSON.parse(localStorage.getItem("details")).image} alt="sd" />
+        {/* {JSON.parse(localStorage.getItem("details")).name} */}
+        <img src={image} alt="sd" />
      
         
         
@@ -86,6 +88,8 @@ const Dashboard = () => {
      
 
       {console.log(userdetails,"##################")}
+
+      {console.log(image)}
 
 
 
