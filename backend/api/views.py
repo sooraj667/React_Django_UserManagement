@@ -194,8 +194,11 @@ class UploadImage(APIView):
         img=request.data.get("imageurl")
         userobj.image=img
         userobj.save()
-       
-        return Response({"msg":"success","imageurl":request.data.get("imageurl"),"userobj":userobj.name})
+
+
+        userdatas=UserAccount.objects.get(id=request.data.get("userid"))
+        ser=UserAccountSerializer(userdatas)
+        return Response({"msg":"success","imageurl":request.data.get("imageurl"),"userdatas":ser.data})
         # print(request.data.get("imageurl"),"   ########")
         # imageurl=request.data.get("imageurl")
         # newimageurl=str(imageurl)

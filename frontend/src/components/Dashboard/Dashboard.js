@@ -17,6 +17,8 @@ const Dashboard = () => {
   const [image, setImage] = useState("");
   const [fireimage, setFireimage] = useState("");
 
+  const [userImage,setUserImage]=useState("")
+
   const uploadImage = () => {
     if (fireimage != "") {
       const imageref = ref(storage, `images/${fireimage.name + v4()}`);
@@ -38,6 +40,9 @@ const Dashboard = () => {
               }
               axiosInstance.post("uploadimage/",datas).then((res)=>{
                 console.log(res.data);
+                localStorage.setItem("details", JSON.stringify(res.data.userdatas));
+                setUserDetails(res.data.userdatas);
+
               }).catch((err)=>alert(" errro in calling the django view"))
             })
             .catch((err) => alert("ERROR ON DOWNLOADING URL"));
@@ -198,7 +203,18 @@ const Dashboard = () => {
       <label htmlFor="">Select Image</label>
       <input type="file" onChange={(e) => setFireimage(e.target.files[0])} />
       <button onClick={uploadImage}>Upload Image</button>
+
+
+      <div>
+
+        {
+          userdetails && <img src={userdetails.image} alt="loading" />
+        }
+      </div>
+
+
     </div>
+    
   );
 };
 
