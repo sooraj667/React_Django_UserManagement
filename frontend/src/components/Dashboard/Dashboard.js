@@ -3,7 +3,10 @@ import Authcontext from "../../context/Logincontext";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios/axios";
 import axios from "axios";
-import "./Dashboard.css"
+import "./Dashboard.css";
+import { storage } from "../../firebase/firebaseconfig";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 const Dashboard = () => {
   const { userDecode, accessToken, setAccessToken, setUserDecode } =
     useContext(Authcontext);
@@ -12,6 +15,37 @@ const Dashboard = () => {
   const [toEdit, setToEdit] = useState(false);
   const [nameChange, setNameChange] = useState("");
   const [image, setImage] = useState("");
+  const [fireimage, setFireimage] = useState("");
+
+  const uploadImage = () => {
+    if (fireimage != "") {
+      const imageref = ref(storage, `images/${fireimage.name + v4()}`);
+      uploadBytes(imageref, fireimage)
+        .then((res) => {
+          console.log(res);
+          getDownloadURL(imageref)
+            .then((url) => {
+              console.log(url);
+              //ithuvare sheri aa
+              // const imageurl=url
+              const parsit=JSON.parse(localStorage.getItem("details"))
+              const userid=parsit.id
+              console.log(userid)
+              const datas={
+                imageurl:url,
+                userid:userid
+                
+              }
+              axiosInstance.post("uploadimage/",datas).then((res)=>{
+                console.log(res.data);
+              }).catch((err)=>alert(" errro in calling the django view"))
+            })
+            .catch((err) => alert("ERROR ON DOWNLOADING URL"));
+        })
+        .catch((err) => alert(err));
+    }
+  };
+
   const handleEdit = () => {
     axiosInstance
       .post(`edituser/${userdetails.id}`, { name: nameChange })
@@ -67,15 +101,12 @@ const Dashboard = () => {
 
   return (
     <div>
-         {userdetails ? (
-        <h1>Welcome {userdetails.name } </h1>
-      ) : (
-        <div></div>
-      )}
-     
+      {userdetails ? <h1>Welcome {userdetails.name} </h1> : <div></div>}
+
       {console.log(accessToken)}
-      <button className="btn btn-danger btnlogout" onClick={logout}>Log Out</button>
-    
+      <button className="btn btn-danger btnlogout" onClick={logout}>
+        Log Out
+      </button>
 
       <div>
         {/* {JSON.parse(localStorage.getItem("details")).name} */}
@@ -92,9 +123,9 @@ const Dashboard = () => {
 
           <div className="col-md-6">
             <button
-            className="btn btn-warning btnedit"
+              className="btn btn-warning btnedit"
               onClick={() => {
-                setToEdit((prev)=>!prev);
+                setToEdit((prev) => !prev);
               }}
             >
               Edit Details
@@ -114,7 +145,9 @@ const Dashboard = () => {
                     onChange={(e) => setNameChange(e.target.value)}
                   />
                 </div>
-                <button className="btn btn-success mt-4" onClick={handleEdit}>SUBMIT</button>
+                <button className="btn btn-success mt-4" onClick={handleEdit}>
+                  SUBMIT
+                </button>
               </div>
             )}
           </div>
@@ -162,7 +195,9 @@ const Dashboard = () => {
 
       {console.log(image)}
 
-   
+      <label htmlFor="">Select Image</label>
+      <input type="file" onChange={(e) => setFireimage(e.target.files[0])} />
+      <button onClick={uploadImage}>Upload Image</button>
     </div>
   );
 };

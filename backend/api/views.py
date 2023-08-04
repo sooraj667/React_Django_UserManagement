@@ -14,7 +14,7 @@ from rest_framework import status
 
 class Basic(APIView):
     
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self,request):
         allusers=UserAccount.objects.all()
@@ -148,7 +148,7 @@ class AdminLogin(APIView):
                 userobjs=UserAccount.objects.all()
                 serializedusers=UserAccountSerializer(userobjs,many=True)
 
-                
+
                 return Response({'message': 'Login successful', 'access': str(refresh.access_token), 'refresh': str(refresh),"alldatas":serialized.data,"userdatas":serializedusers.data})
         
                 
@@ -183,3 +183,29 @@ class AdminDisplay(APIView):
         return Response({"userdatas":serializedusers.data})
 
 
+
+class UploadImage(APIView):
+    def post(self,request):
+        print("view reached")
+        print(request.data.get("imageurl"))
+        print(request.data.get("userid"))
+        userobj=UserAccount.objects.get(id=request.data.get("userid"))
+        print(userobj)
+        img=request.data.get("imageurl")
+        userobj.image=img
+        userobj.save()
+       
+        return Response({"msg":"success","imageurl":request.data.get("imageurl"),"userobj":userobj.name})
+        # print(request.data.get("imageurl"),"   ########")
+        # imageurl=request.data.get("imageurl")
+        # newimageurl=str(imageurl)
+        # print(imageurl + "IMAGE")
+        # id=request.data.get("userid")
+        # print(id)
+
+        # userobj=UserAccount.objects.get(id=int(id))
+        # userobj.image=newimageurl
+        # print(userobj )
+        # userobj.save()
+        # print(userobj )
+        # return Response({"msg":"success","userobj":userobj})

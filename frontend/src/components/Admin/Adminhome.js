@@ -3,6 +3,8 @@ import axiosInstance from '../../axios/axios'
 import { useNavigate } from 'react-router-dom'
 const Adminhome = () => {
     const[userDatas,setUserDatas]=useState(JSON.parse(localStorage.getItem("alluserdetails")))
+    const data=JSON.parse(localStorage.getItem("alluserdetails"))
+    console.log(userDatas);
     const navigate=useNavigate()
     // useEffect(
     //     ()=>{
@@ -64,7 +66,7 @@ const Adminhome = () => {
 
             
         } */}
-
+{/* 
         {
             userDatas.forEach(user => {
                 <div>
@@ -74,9 +76,31 @@ const Adminhome = () => {
                 </div>
            
               })
+        } */}
+
+        {userDatas.map(
+            (item)=>{
+                console.log(item.email);
+                <h1>{item.email}</h1>
+            }
+        )
         }
 
-        {console.log(userDatas)}
+        {console.log(userDatas+"HEYY")}
+
+        {
+            data.map(
+                (item)=>{
+                    return (
+                        <h1>{item.email}</h1>
+                    )
+                    
+                    // <input type="text" value={item.name} />
+                    // console.log(item.name);
+                }
+            )
+        }
+        <input type="text" value={{data}} />
 
    
 
