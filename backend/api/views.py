@@ -199,7 +199,7 @@ class UploadImage(APIView):
         userdatas=UserAccount.objects.get(id=request.data.get("userid"))
         ser=UserAccountSerializer(userdatas)
         return Response({"msg":"success","imageurl":request.data.get("imageurl"),"userdatas":ser.data})
-        # print(request.data.get("imageurl"),"   ########")
+        # print(request.data.get("imageurl"),"   #######")
         # imageurl=request.data.get("imageurl")
         # newimageurl=str(imageurl)
         # print(imageurl + "IMAGE")
@@ -212,3 +212,53 @@ class UploadImage(APIView):
         # userobj.save()
         # print(userobj )
         # return Response({"msg":"success","userobj":userobj})
+
+
+    
+class Adminedituser(APIView):
+    def put(self,request):
+     
+        
+
+        userid=request.data.get("id")
+        name=request.data.get("name")
+        email=request.data.get("email")
+        phonenumber=request.data.get("phonenumber")
+
+
+
+
+
+
+
+        userobj=UserAccount.objects.get(id=userid)
+        userobj.email=email
+        userobj.name=name
+        userobj.phonenumber=phonenumber
+        userobj.save()
+
+
+        allusers=UserAccount.objects.all()
+        serializedusers=UserAccountSerializer(allusers,many=True)
+
+
+        return Response({"userdatas":serializedusers.data})
+    
+class Admindeleteuser(APIView):
+    def post(self,request,id):
+        print("view reached")
+        print(id,"PRINTTTTTTTTTTTTTTTT")
+        userobj=UserAccount.objects.get(id=id)
+        userobj.delete()
+                # userid=request.data.get("userid")
+        # print(request.data.get("userid"),"###################DEY##")
+        # userid=request.data.get("userid")
+        # print(userid + type(userid))
+        
+        # userobj=UserAccount.objects.get(id=int(userid))
+        # print(userobj.name,"USERNAME")
+        # userobj.delete()
+        
+        userobjs=UserAccount.objects.all()
+        serializedobjs=UserAccountSerializer(userobjs,many=True)
+        return Response({"msg":"Deleted","userdatas":serializedobjs.data})

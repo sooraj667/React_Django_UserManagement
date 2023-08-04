@@ -16,7 +16,9 @@ urlpatterns = [
     path("edituser/<int:id>",EdituserView.as_view(),name="edituser_view"),
     path("adminlogin/",AdminLogin.as_view(),name="adminlogin_view"),
     path("admindisplay/",AdminDisplay.as_view(),name="admindisplay_view"),
-    path("uploadimage/",UploadImage.as_view(),name="uploadimage_view")
+    path("uploadimage/",UploadImage.as_view(),name="uploadimage_view"),
+    path("edituser/",Adminedituser.as_view(),name="adminedituser_view"),
+    path("admindeleteuser/<int:id>",Admindeleteuser.as_view(),name="admindeleteuser_view")
 
     
    

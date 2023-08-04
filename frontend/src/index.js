@@ -10,6 +10,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import customersSlice from "./feautures/customers";
 import customerlogin from "./feautures/customerlogin";
 import adminloginSlice from "./feautures/adminlogin";
+import adminHomeSlice from "./feautures/adminhome"
 
 
 
@@ -17,7 +18,9 @@ const appstore = configureStore({
   reducer: {
     customers: customersSlice,
     customerlogin:customerlogin,
-    adminlogin:adminloginSlice
+    adminlogin:adminloginSlice,
+    adminhome:adminHomeSlice
+
   },
 });
 
