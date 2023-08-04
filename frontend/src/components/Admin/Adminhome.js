@@ -3,8 +3,9 @@ import axiosInstance from '../../axios/axios'
 import { useNavigate } from 'react-router-dom'
 
 import { useSelector, useDispatch } from "react-redux";
-import { changeName,changeEmail,changePhonenumber,changeEditstate,changeDeletestate } from "../../feautures/adminhome";
+import { changeName,changeEmail,changePhonenumber,changePassword,changeEditstate,changeDeletestate } from "../../feautures/adminhome";
 import axios from 'axios';
+import "./Adminhome.css"
 
 const Adminhome = () => {
     const admin= useSelector((state)=> state.adminhome)
@@ -12,10 +13,14 @@ const Adminhome = () => {
 
 
 
-
+    
 
     
     const[userDatas,setUserDatas]=useState(JSON.parse(localStorage.getItem("alluserdetails")))
+
+    const [deleteState,setDeleteState]=useState(false)
+    const [editState,setEditState]=useState(false)
+    const [addUserState,setAddUserState]=useState(false)
 
 
 
@@ -48,12 +53,14 @@ const Adminhome = () => {
         axiosInstance.put("edituser/",datas).then((res)=>{
             localStorage.setItem("alluserdetails",JSON.stringify(res.data.userdatas))
             setUserDatas(()=>JSON.parse(localStorage.getItem("alluserdetails")))
+            setEditState(()=>false)
         })
     }
 
 
     const deleteHandlerfunc=()=>{
         console.log(admin.value.deleteactive)
+        
         // const values={
         //     id:admin.value.deleteactive,
 
@@ -63,6 +70,7 @@ const Adminhome = () => {
             console.log(res.data.msg)
             localStorage.setItem("alluserdetails",JSON.stringify(res.data.userdatas))
             setUserDatas(()=>JSON.parse(localStorage.getItem("alluserdetails")))
+            setDeleteState(()=>false)
         }).catch((err)=>alert(err))
     }
     // useEffect(
@@ -114,7 +122,9 @@ const Adminhome = () => {
                 
             }
         }>Logout</button>
-        {console.log(userDatas)}
+
+        <button className='btn btn-warning' onClick={()=>setAddUserState((prev)=>!(prev))}>Add User</button>
+    
 
         {/* {
             userDatas.map(
@@ -138,11 +148,70 @@ const Adminhome = () => {
         } */}
 
         {
-            admin.value.deleteactive? <div>
+            deleteState? <div>
                 <h2>Are you sure you want to Delete?</h2>
                 <button onClick={deleteHandlerfunc}>Confirm</button>
             </div>: ""
         }
+
+    {
+        addUserState? 
+        <div class="addusercard ">
+            <div className="form-group">
+              <label htmlFor="name">Name:</label>
+              <input
+                type="text"
+                className="form-control "
+                id="name"
+                name="name"
+                required
+                value={admin.value.name}
+                onChange={(e) => dispatch(changeName(e.target.value))}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                required
+                value={admin.value.email}
+                onChange={(e) => dispatch(changeEmail(e.target.value))}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="phone">Phone:</label>
+              <input
+                type="number"
+                className="form-control"
+                id="phone"
+                name="phone"
+                required
+                value={admin.value.phone}
+                onChange={(e) => dispatch(changePhonenumber(e.target.value))}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="phone">Password:</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                name="password"
+                required
+                value={admin.value.password}
+                onChange={(e) => dispatch(changePassword(e.target.value))}
+              />
+            </div>
+            <button onClick className='btn btn-success'>Add User</button>
+
+
+        </div>: ""
+    }
 
 <div class="container mt-5">
   <h2>Product List</h2>
@@ -163,8 +232,16 @@ const Adminhome = () => {
                     <td>{item.name}</td>
                     <td>{item.email}</td>
                     <td>{item.phonenumber}</td>
-                    <td><button className='btn btn-warning' onClick={()=>dispatch(changeEditstate(item.id))}>Edit</button></td>
-                    <td><button className='btn btn-danger' onClick={()=>dispatch(changeDeletestate(item.id))}>Delete</button></td>
+                    <td><button className='btn btn-warning' onClick={()=>{
+                        dispatch(changeEditstate(item.id))
+                        setEditState(()=>true)
+
+
+                    }}>Edit</button></td>
+                    <td><button className='btn btn-danger' onClick={()=>{
+                        dispatch(changeDeletestate(item.id))
+                        setDeleteState(()=>true)
+                    }}>Delete</button></td>
                     
                   </tr>
 
@@ -179,7 +256,7 @@ const Adminhome = () => {
     </tbody>
   </table>
   {
-    admin.value.editactive ? 
+    editState ? 
     <div>
         <div className="form-group">
               <label htmlFor="name">Name:</label>
@@ -221,18 +298,18 @@ const Adminhome = () => {
             </div>
             <button onClick={editUserHandler}>Submit</button>
 
-            <div>{admin.value.editactive}</div>
+            {/* <div>{admin.value.editactive}</div> */}
         
 
 
         
-    </div>  :
-     <h1>Not Hello</h1> 
+    </div>  :""
+    
   }
 
-  {
+  {/* {
     admin.value.deleteactive? <h1>{admin.value.deleteactive}</h1>:""
-  }
+  } */}
 </div>
 
 
