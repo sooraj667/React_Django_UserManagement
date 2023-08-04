@@ -1,4 +1,31 @@
 .addusercard{
     width: 50vw;
     margin-left: 25vw;
+    background-color: rgb(193, 164, 227);
+    padding: 2vw;
+    border-radius: 10px;
+    margin-top: 4vw;
+    margin-bottom: 4vw;
+}
+.editcard{
+    width: 50vw;
+    margin-left: 25vw;
+    background-color: rgb(193, 164, 227);
+    padding: 2vw;
+    border-radius: 10px;
+    margin-top: 4vw;
+    margin-bottom: 4vw;
+
+}
+.form-control{
+    background-color:rgb(226, 208, 241) ;
+    margin: 1vw;
+}
+.adduserbtn{
+margin-left: 90vw;
+}
+.logoutbtn{
+    margin-left: 90vw;
+    margin-bottom:2vh ;
+
 }

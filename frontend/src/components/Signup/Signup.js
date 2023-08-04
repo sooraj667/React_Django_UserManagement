@@ -5,9 +5,12 @@ import axiosInstance from "../../axios/axios";
 import { useEffect } from 'react';
 import {  useSelector,useDispatch } from 'react-redux';
 import {changeName,changeEmail,changePhone,changePassword,changeRepassword} from "../../feautures/customers"
+import "./Signup.css"
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
     const cust=useSelector((state)=>state.customers)
     const dispatch=useDispatch()
+    const navigate=useNavigate()
 
     const handleSubmit=()=>{
       console.log(cust.value)
@@ -21,7 +24,12 @@ const Signup = () => {
 
       }
 
-      axiosInstance.post("signup/",data).then((res)=> console.log(res.data)).catch((err)=>console.log(err))
+      axiosInstance.post("signup/",data).then((res)=>{
+        console.log(res.data)
+        navigate("/loginpage")
+
+
+      } ).catch((err)=>console.log(err))
 
 
       // axios(
@@ -46,7 +54,7 @@ const Signup = () => {
       <div className="container mt-5">
   <div className="row justify-content-center">
     <div className="col-md-6">
-      <div className="card">
+      <div className="card signupcard">
         <div className="card-header">
           <h2>Sign Up Form</h2>
         </div>
@@ -104,7 +112,7 @@ const Signup = () => {
               />
             </div>
 
-            <button onClick={handleSubmit} className="btn btn-primary btn-block">
+            <button onClick={handleSubmit} className="btn btn-success btn-block">
               Sign Up
             </button>
           </form>

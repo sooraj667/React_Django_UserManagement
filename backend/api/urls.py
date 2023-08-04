@@ -18,7 +18,8 @@ urlpatterns = [
     path("admindisplay/",AdminDisplay.as_view(),name="admindisplay_view"),
     path("uploadimage/",UploadImage.as_view(),name="uploadimage_view"),
     path("edituser/",Adminedituser.as_view(),name="adminedituser_view"),
-    path("admindeleteuser/<int:id>",Admindeleteuser.as_view(),name="admindeleteuser_view")
+    path("admindeleteuser/<int:id>",Admindeleteuser.as_view(),name="admindeleteuser_view"),
+    path("adminadduser/",Adminadduser.as_view(),name="adminadduser_view")
 
     
    

@@ -17,7 +17,8 @@ const Dashboard = () => {
   const [image, setImage] = useState("");
   const [fireimage, setFireimage] = useState("");
 
-  const [userImage,setUserImage]=useState("")
+  const [userImage, setUserImage] = useState("");
+  const [changeImage,setChangeImage]=useState(false)
 
   const uploadImage = () => {
     if (fireimage != "") {
@@ -30,20 +31,24 @@ const Dashboard = () => {
               console.log(url);
               //ithuvare sheri aa
               // const imageurl=url
-              const parsit=JSON.parse(localStorage.getItem("details"))
-              const userid=parsit.id
-              console.log(userid)
-              const datas={
-                imageurl:url,
-                userid:userid
-                
-              }
-              axiosInstance.post("uploadimage/",datas).then((res)=>{
-                console.log(res.data);
-                localStorage.setItem("details", JSON.stringify(res.data.userdatas));
-                setUserDetails(res.data.userdatas);
-
-              }).catch((err)=>alert(" errro in calling the django view"))
+              const parsit = JSON.parse(localStorage.getItem("details"));
+              const userid = parsit.id;
+              console.log(userid);
+              const datas = {
+                imageurl: url,
+                userid: userid,
+              };
+              axiosInstance
+                .post("uploadimage/", datas)
+                .then((res) => {
+                  console.log(res.data);
+                  localStorage.setItem(
+                    "details",
+                    JSON.stringify(res.data.userdatas)
+                  );
+                  setUserDetails(res.data.userdatas);
+                })
+                .catch((err) => alert(" errro in calling the django view"));
             })
             .catch((err) => alert("ERROR ON DOWNLOADING URL"));
         })
@@ -118,23 +123,46 @@ const Dashboard = () => {
         {/* <img src={image} alt="sd" /> */}
 
         <div className="row">
-          <div className="col-md-6">
+          {/* <div className="col-md-6">
             <img
               src="https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGhvdGVsfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"
               alt="Hotel Lobby"
               className="img-fluid rounded"
             />
-          </div>
+          </div> */}
 
           <div className="col-md-6">
-            <button
+            
+            <div>
+              {userdetails && <img className="profileimage" src={userdetails.image} alt="loading" />}
+            </div>
+            <div><button className="btn btn-info changebtn" onClick={()=>setChangeImage((prev)=>!(prev))}>Change Image</button></div>
+            
+         
+            
+              {
+                changeImage && <div>
+                <input
+                  type="file"
+                  className="form-control"
+                  onChange={(e) => setFireimage(e.target.files[0])}
+                />
+                <button className="btn btn-success" onClick={uploadImage}>Upload Image</button>
+    
+                </div>
+                
+              }
+                 <button
               className="btn btn-warning btnedit"
               onClick={() => {
                 setToEdit((prev) => !prev);
               }}
             >
-              Edit Details
+              Edit Name
             </button>
+           
+
+            
 
             {toEdit && (
               <div className="editcard card p-3">
@@ -199,22 +227,7 @@ const Dashboard = () => {
       {console.log(userdetails, "##################")}
 
       {console.log(image)}
-
-      <label htmlFor="">Select Image</label>
-      <input type="file" onChange={(e) => setFireimage(e.target.files[0])} />
-      <button onClick={uploadImage}>Upload Image</button>
-
-
-      <div>
-
-        {
-          userdetails && <img src={userdetails.image} alt="loading" />
-        }
-      </div>
-
-
     </div>
-    
   );
 };
 

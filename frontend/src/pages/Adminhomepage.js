@@ -6,7 +6,7 @@ const Adminhomepage = () => {
   return (
     <div>
         
-        Adminhomepage
+        <h1>ADMIN DASHBOARD</h1>
         <Adminhome/>
 
         

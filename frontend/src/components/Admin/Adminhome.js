@@ -14,7 +14,22 @@ const Adminhome = () => {
 
 
     
+    const addUserHandler =()=>{
+        console.log(admin.value.name + admin.value.email +admin.value.password +admin.value.phonenumber);
+        const datas={
+            "name":admin.value.name,
+            "email":admin.value.email,
+            "password":admin.value.password,
+            "phonenumber":admin.value.phonenumber
+        }
+        axiosInstance.post("adminadduser/",datas).then((res)=>{
+            alert("User Added")
+            localStorage.setItem("alluserdetails",JSON.stringify(res.data.userdatas))
+            setUserDatas(()=>JSON.parse(localStorage.getItem("alluserdetails")))
+            setAddUserState(()=>false)
 
+        }).catch((err)=>alert(err))
+    }
     
     const[userDatas,setUserDatas]=useState(JSON.parse(localStorage.getItem("alluserdetails")))
 
@@ -104,17 +119,10 @@ const Adminhome = () => {
   return (
     <div>
 
-        {/* {
-            userDatas &&userDatas.map(
-                (item)=>{
-                    <div>hello</div>
 
-                }
-            )
-        } */}
         
-        Adminhome
-        <button onClick={
+        
+        <button className="btn btn-danger logoutbtn" onClick={
             ()=>{
                 localStorage.removeItem("adminAccessToken")
                 localStorage.removeItem("alluserdetails")
@@ -123,29 +131,10 @@ const Adminhome = () => {
             }
         }>Logout</button>
 
-        <button className='btn btn-warning' onClick={()=>setAddUserState((prev)=>!(prev))}>Add User</button>
+        <button className='btn btn-warning adduserbtn' onClick={()=>setAddUserState((prev)=>!(prev))}>Add User</button>
     
 
-        {/* {
-            userDatas.map(
-                (item)=>{
-                    <h1>{item.email}</h1>
-                }
-            )
 
-            
-        } */}
-{/* 
-        {
-            userDatas.forEach(user => {
-                <div>
-                {console.log(user.email)}
-                <h2>{user.email}</h2>
-                <h1>{user.phonenumber}</h1>
-                </div>
-           
-              })
-        } */}
 
         {
             deleteState? <div>
@@ -191,7 +180,7 @@ const Adminhome = () => {
                 id="phone"
                 name="phone"
                 required
-                value={admin.value.phone}
+                value={admin.value.phonenumber}
                 onChange={(e) => dispatch(changePhonenumber(e.target.value))}
               />
             </div>
@@ -207,14 +196,14 @@ const Adminhome = () => {
                 onChange={(e) => dispatch(changePassword(e.target.value))}
               />
             </div>
-            <button onClick className='btn btn-success'>Add User</button>
+            <button onClick={addUserHandler} className='btn btn-success'>Add User</button>
 
 
         </div>: ""
     }
 
 <div class="container mt-5">
-  <h2>Product List</h2>
+  <h2>Users List</h2>
   <table class="table table-bordered table-hover">
     <thead class="thead-dark">
       <tr>
@@ -257,7 +246,8 @@ const Adminhome = () => {
   </table>
   {
     editState ? 
-    <div>
+    <div className="editcard">
+        <h1>Edit Details</h1>
         <div className="form-group">
               <label htmlFor="name">Name:</label>
               <input
@@ -296,7 +286,7 @@ const Adminhome = () => {
                 onChange={(e) => dispatch(changePhonenumber(e.target.value))}
               />
             </div>
-            <button onClick={editUserHandler}>Submit</button>
+            <button onClick={editUserHandler} className="btn btn-success">Submit</button>
 
             {/* <div>{admin.value.editactive}</div> */}
         
@@ -307,9 +297,7 @@ const Adminhome = () => {
     
   }
 
-  {/* {
-    admin.value.deleteactive? <h1>{admin.value.deleteactive}</h1>:""
-  } */}
+
 </div>
 
 
@@ -317,18 +305,6 @@ const Adminhome = () => {
 
       
 
-        {/* {
-            data.map(
-                (item)=>{
-                    return (
-                        <h1>{item.email}</h1>
-                    )
-                    
-                    // <input type="text" value={item.name} />
-                    // console.log(item.name);
-                }
-            )
-        } */}
         
 
    

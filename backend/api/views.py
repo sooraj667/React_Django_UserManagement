@@ -262,3 +262,18 @@ class Admindeleteuser(APIView):
         userobjs=UserAccount.objects.all()
         serializedobjs=UserAccountSerializer(userobjs,many=True)
         return Response({"msg":"Deleted","userdatas":serializedobjs.data})
+    
+
+class Adminadduser(APIView):
+    def post(self,request):
+        print("VIEWWWWWWWWWWWW")
+        name=request.data.get("name")
+        password=request.data.get("password")
+        email=request.data.get("email")
+        phonenumber=request.data.get("phonenumber")
+        print("ACCESSEDDDDDDDDDDDDD")
+
+        UserAccount.objects.create(name=name,phonenumber=phonenumber,email=email,password=password)
+        userobjs=UserAccount.objects.all()
+        serializedusers=UserAccountSerializer(userobjs,many=True)
+        return Response({"msg":"success","userdatas":serializedusers.data})

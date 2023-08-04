@@ -4,7 +4,7 @@ import Adminlogin from "../components/Admin/Adminlogin"
 const Adminloginpage = () => {
   return (
     <div>
-        ADMIN
+        <h1>ADMIN LOGIN</h1>
         <Adminlogin/>
        
 

@@ -57,7 +57,7 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="card logincard">
+      <div className="card  addusercard">
       <div className="container mt-5">
         <h2 className="mb-4">Login Form</h2>
 
@@ -87,7 +87,7 @@ const Login = () => {
           />
         </div>
 
-        <button onClick={handleLoginSubmit} className="btn btn-primary mt-4 mb-3">
+        <button onClick={handleLoginSubmit} className="btn btn-success mt-4 mb-3">
           Login
         </button>
       </div>

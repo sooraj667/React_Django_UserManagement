@@ -5,7 +5,7 @@ const Body = () => {
     <div className="container mt-4">
       <div className="row">
         <div className="col-md-6">
-          <h2>Welcome to Our Hotel Shop</h2>
+          <h2>Welcome to Our Hotel Starlight Inn</h2>
           <p className="lead">Discover luxurious and comfortable accommodations for your next getaway.</p>
           <button className="btn btn-primary">Book Now</button>
         </div>

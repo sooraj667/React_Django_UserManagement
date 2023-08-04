@@ -8,8 +8,24 @@
     margin-left: 90vw;
   
 }
-.btnedit{
-    margin-left: 40vw;
-    margin-top: 2vh;
+    /* .btnedit{
+        margin-left: 50vw;
+        padding-right: 2vw;
+        
 
+    } */
+.profileimage{
+    width:10vw;
+    border-radius: 50%;
+    margin-right: 30vw;
+}
+.changebtn{
+    margin-right: 30vw;
+    margin-top: 2vh;
+}
+.btnedit{
+    margin-right: 30vw;
+    margin-top: 2vh;
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
 }

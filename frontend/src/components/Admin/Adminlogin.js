@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {changeEmail,changePassword} from "../../feautures/adminlogin";
 import axiosInstance from "../../axios/axios";
-
+import "./Adminhome.css"
 const Adminlogin = () => {
   const navigate = useNavigate();
   const admin = useSelector((state) => state.adminlogin);
@@ -32,13 +32,13 @@ const Adminlogin = () => {
   }
   return (
     <div>
-      <div>Adminlogin</div>
+     
 
-      <div className="container mt-5">
-        <h2>LoginForm</h2>
+      <div className="container mt-5 addusercard">
+    
 
         <div className="form-group">
-          <label htmlFor="username">Email:</label>
+          <label htmlFor="username ">Email:</label>
           <input
             type="email"
             className="form-control"
@@ -63,7 +63,7 @@ const Adminlogin = () => {
           />
         </div>
 
-        <button onClick={handleLoginSubmit} className="btn btn-primary">
+        <button onClick={handleLoginSubmit} className="btn btn-success">
           Login
         </button>
       </div>
