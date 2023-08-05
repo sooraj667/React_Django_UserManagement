@@ -6,7 +6,7 @@ const axiosInstance=axios.create(
         baseURL:"http://127.0.0.1:8000/api/",
         headers:{
             'Content-Type':'application/json',
-            Authorization:localStorage.getItem("authtoken")? "Bearer" + localStorage.getItem("authtoken"):null,
+            Authorization:localStorage.getItem("authToken")? "Bearer " + JSON.parse(localStorage.getItem("authToken")):null,
             accept:'application/json'
         }
     }

@@ -15,7 +15,7 @@ from rest_framework import status
 class Basic(APIView):
    
     
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self,request):
         allusers=UserAccount.objects.all()
