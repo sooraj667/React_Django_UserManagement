@@ -13,6 +13,7 @@ from rest_framework import status
 # Create your views here.
 
 class Basic(APIView):
+   
     
     # permission_classes = [IsAuthenticated]
 
@@ -277,3 +278,11 @@ class Adminadduser(APIView):
         userobjs=UserAccount.objects.all()
         serializedusers=UserAccountSerializer(userobjs,many=True)
         return Response({"msg":"success","userdatas":serializedusers.data})
+
+
+class Adminsearchuser(APIView):
+    def post(self,request):
+        searchvalue=request.data.get("searchvalue")
+        userobjs=UserAccount.objects.filter(name=searchvalue)
+        serializeddata=UserAccountSerializer(userobjs,many=True)
+        return Response(serializeddata.data)

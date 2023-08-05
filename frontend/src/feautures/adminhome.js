@@ -6,7 +6,8 @@ const INITITALSTATE={
     phonenumber:"",
     password:"",
     editactive:null,
-    deleteactive:null
+    deleteactive:null,
+    searchvalue:""
 
   
 }
@@ -36,6 +37,9 @@ const adminHomeSlice = createSlice(
             },
             changeDeletestate:(state,action)=>{
                 state.value.deleteactive=action.payload
+            },
+            changeSearch:(state,action)=>{
+                state.value.searchvalue=action.payload
             }
         
     
@@ -49,6 +53,6 @@ const adminHomeSlice = createSlice(
 
 )
 
-export const {changeEmail,changeName,changePhonenumber,changePassword,changeEditstate,changeDeletestate} = adminHomeSlice.actions
+export const {changeEmail,changeName,changePhonenumber,changePassword,changeEditstate,changeDeletestate,changeSearch} = adminHomeSlice.actions
 
 export default adminHomeSlice.reducer

@@ -11,6 +11,7 @@ import Dashboardpage from './pages/Dashboardpage';
 import jwt_decode from "jwt-decode";
 import axios from "axios"
 import Adminhomepage from './pages/Adminhomepage';
+import Dashnext from './components/Dashboard/Dashnext';
 function App() {
   
   const [accessToken, setAccessToken] = useState(localStorage.getItem("authToken") ? localStorage.getItem("authToken") : "");
@@ -33,6 +34,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboardpage />} />
         <Route path="/adminlogin" element={<Adminloginpage />} />
         <Route path="/adminhome" element={<Adminhomepage />} />
+        <Route path="/dashnext" element={<Dashnext />} />
        
     
 
