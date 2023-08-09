@@ -17,6 +17,7 @@ function App() {
   const [accessToken, setAccessToken] = useState(localStorage.getItem("authToken") ? localStorage.getItem("authToken") : "");
   const [userDecode,setUserDecode]=useState(localStorage.getItem("authToken") ? jwt_decode(localStorage.getItem("authToken")) : "")
   
+  
 
   
   
@@ -29,9 +30,12 @@ function App() {
 
         
         <Route path="/" exact element={<Home/>}/>
-        <Route path="/signuppage" element={<Createpage />} />
-        <Route path="/loginpage" element={<Loginpage />} />
-        <Route path="/dashboard" element={<Dashboardpage />} />
+        
+        {!(accessToken) && <Route path="/signuppage" element={<Createpage />} /> }
+        {!(accessToken) && <Route path="/loginpage" element={<Loginpage />} /> }
+        
+        {accessToken && <Route path="/dashboard" element={<Dashboardpage />} />}
+
         <Route path="/adminlogin" element={<Adminloginpage />} />
         <Route path="/adminhome" element={<Adminhomepage />} />
         <Route path="/dashnext" element={<Dashnext />} />

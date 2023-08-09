@@ -8,6 +8,8 @@ import {changeName,changeEmail,changePhone,changePassword,changeRepassword} from
 import "./Signup.css"
 import { useNavigate } from "react-router-dom";
 const Signup = () => {
+
+  
     const cust=useSelector((state)=>state.customers)
     const dispatch=useDispatch()
     const navigate=useNavigate()

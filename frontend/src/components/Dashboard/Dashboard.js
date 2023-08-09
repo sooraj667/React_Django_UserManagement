@@ -29,7 +29,7 @@ const Dashboard = () => {
           getDownloadURL(imageref)
             .then((url) => {
               console.log(url);
-              //ithuvare sheri aa
+              
               // const imageurl=url
               const parsit = JSON.parse(localStorage.getItem("details"));
               const userid = parsit.id;

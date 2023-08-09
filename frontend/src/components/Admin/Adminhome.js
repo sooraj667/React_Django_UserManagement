@@ -174,9 +174,9 @@ const Adminhome = () => {
       </button>
 
       {deleteState ? (
-        <div>
-          <h2>Are you sure you want to Delete?</h2>
-          <button onClick={deleteHandlerfunc}>Confirm</button>
+        <div className="addusercard">
+          <h2>Are you sure you want to Delete? </h2>
+          <button onClick={deleteHandlerfunc} className="btn btn-danger mt-3">Confirm</button>
         </div>
       ) : (
         ""
