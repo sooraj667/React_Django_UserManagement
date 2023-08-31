@@ -33,10 +33,10 @@ const Login = () => {
           access: res.data.access,
         };
 
-        setAccessToken(tokensobj);
+        // setAccessToken(tokensobj);
 
-        const reqdatas = jwt_decode(res.data.access);
-        setUserDecode(reqdatas);
+        // const reqdatas = jwt_decode(res.data.access);
+        // setUserDecode(reqdatas);
         localStorage.setItem("authToken", JSON.stringify(res.data.access));
         localStorage.setItem("details", JSON.stringify(res.data.alldatas));
 

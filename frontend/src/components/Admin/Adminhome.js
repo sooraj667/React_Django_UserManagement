@@ -79,10 +79,7 @@ const Adminhome = () => {
   const deleteHandlerfunc = () => {
     console.log(admin.value.deleteactive);
 
-    // const values={
-    //     id:admin.value.deleteactive,
-
-    // }
+ 
 
     axiosInstance
       .post(`admindeleteuser/${admin.value.deleteactive}`)

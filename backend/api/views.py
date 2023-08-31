@@ -166,6 +166,7 @@ class AdminLogin(APIView):
 
     
 class AdminDisplay(APIView):
+
     def get(self,request):
         # email=request.data.get("email")
         # adminobj=UserAccount.objects.get(email=email)
@@ -259,7 +260,9 @@ class Admindeleteuser(APIView):
         # userobj=UserAccount.objects.get(id=int(userid))
         # print(userobj.name,"USERNAME")
         # userobj.delete()
+
         
+
         userobjs=UserAccount.objects.all()
         serializedobjs=UserAccountSerializer(userobjs,many=True)
         return Response({"msg":"Deleted","userdatas":serializedobjs.data})
